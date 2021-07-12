@@ -1,0 +1,39 @@
+{
+  "name": "teamappclone",
+  "version": "1.0.0",
+  "description": "Team App Clone for Microsoft Engage",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chetanshahra/Team-App-Clone.git"
+  },
+  "author": "Chetan Shahra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chetanshahra/Team-App-Clone/issues"
+  },
+  "homepage": "https://github.com/chetanshahra/Team-App-Clone#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.4.1",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "joi": "^17.4.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.13.0",
+    "nodemon": "^2.0.9",
+    "passport": "^0.4.1",
+    "passport-local-mongoose": "^6.1.0",
+    "peer": "^0.6.1",
+    "socket.io": "^4.1.2",
+    "uuid": "^8.3.2"
+  }
+}

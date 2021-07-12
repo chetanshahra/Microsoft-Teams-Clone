@@ -1,0 +1,120 @@
+<% if(!currentUser){ %>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Microsoft Teams Clone</title>
+        <link rel="stylesheet" href="/chatstyle.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script defer src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>    
+        <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    </head>
+    <body class= "bg-dark">
+        <%- include('./partials/navbar')%>
+        <%- include('./partials/flash')%>
+        <div class="home__main text-light">
+            <h3> Welcome to the Teams App!</h3>
+            <p>by Chetan Shahra</p>
+            <br>
+            <a href="/new"><button type="button" class="btn btn-light">New Meet</button></a>
+            <a href="/join"><button type="button" class="btn btn-light">Join a Meet</button></a>
+            <br><br><br>
+            <p class="mb-0"> Need a Help?</p>
+            <p> Please feel free to write to me at <a href = "mailto: shahrachetan@gmail.com">shahrachetan@gmail.com</a></p>
+            <br>
+        </div>
+    </body>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+        <script src="/chatscript.js" defer></script>
+    </html>
+<% } else { %>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Microsoft Teams Clone</title>
+        <link rel="stylesheet" href="/chatstyle.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script defer src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>    
+        <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    </head>
+    <body>
+        <%- include('./partials/navbar')%>
+        <%- include('./partials/flash')%>
+        <div class="main">
+          <div class="main__left">
+                <% if(!me.myMeets.length){ %>
+                    <div class="home__main text-dark">
+                        <h5>Your meetings will appear here</h5>
+                    </div>
+                <% } %>
+                    <% const zeroPad = (num, places) => String(num).padStart(places, '0') %> 
+                <% for(let i = 0; i < me.myMeets.length; i++) {%>
+                    <% const dateTemp = new Date(me.myMeets[i].lastMessage.sentAt); %> 
+                    <% var currentOffset = dateTemp.getTimezoneOffset(); %>
+                    <% var ISTOffset = 330;   // IST offset UTC +5:30 %> 
+                    <% var date = new Date(dateTemp.getTime() + (ISTOffset + currentOffset)*60000); %>
+                    <div>
+                        <a href="/<%= me.myMeets[i].meetId %>/chat" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                           <div class="media">
+                                <div class="media-body ml-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-1">
+                                        <h6 class="mb-0"><%= me.myMeets[i].meetName %></h6><small class="small font-weight-bold"><%= zeroPad(date.getHours(), 2) %>:<%= zeroPad(date.getMinutes(),2) %>  <%= zeroPad(date.getDate(), 2) %>/<%= zeroPad(date.getMonth() + 1, 2) %>/<%= zeroPad(date.getFullYear(), 4) %></small>
+                                    </div>
+                                    <p class="font-italic text-muted mb-0 text-small"><b><%= me.myMeets[i].lastMessage.sentBy %></b> : 
+                                        <% if(me.myMeets[i].lastMessage.message.length > 80){ %>
+                                            <%= me.myMeets[i].lastMessage.message.slice(0,80) %>... 
+                                        <% } else { %>
+                                            <%= me.myMeets[i].lastMessage.message %>
+                                        <% } %> 
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% } %> 
+            </div>
+            <div class="main__mid bg-dark">
+                <div class="home__main text-light">
+                    <h3> Welcome <%= me.firstname %> !!</h3>
+                    <h3> Please select a Meeting to continue </h3>
+                    <h4>OR</h4>
+                    <a href="/new"><button type="button" class="btn btn-light">New Meet</button></a>
+                    <a href="/join"><button type="button" class="btn btn-light">Join a Meet</button></a>
+                </div>
+            </div>
+            <div class="main__right bg-dark">
+                <div class="home__main text-light">
+                    <p> Need a Help?</p>
+                    <p> Please feel free to write to me at <a href = "mailto: shahrachetan@gmail.com">shahrachetan@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="/chatscript.js" defer></script>
+    </html>
+<% } %> 

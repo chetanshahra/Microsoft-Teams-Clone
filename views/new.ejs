@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+            <div class="card shadow">
+                    <div class="card-body">
+                    <form action="/new" method="POST" class="validated-form" novalidate>
+                        <div class="col-md-12">
+                            <input class="form-control" type="text" id="meetName" name="meetName" placeholder="Meeting Name*" required>
+                        </div>
+                        <div >
+                            <input class="form-control" type="text" id="meetId" name="meetId" placeholder="Meeting Code ">
+                        </div>
+                        <div>
+                            <textarea class="form-control" id="allowedUsers" name="allowedUsers" placeholder="Particpants Email Ids (Space Seperated)"></textarea>
+                        </div>
+                        <br>
+                        <button class="btn btn-success btn-block">Create</button>
+                    </form>
+                    <br>
+                    <form action="\join" class="validated-form" novalidate>
+                        <button class="btn btn-info btn-block">Join a Meeting</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
