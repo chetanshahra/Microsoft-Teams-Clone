@@ -53,7 +53,7 @@
 ### Microsoft Engage 2021
 
 This project is a part of Microsoft Engage Mentorship Program 2021. It was a 4 week program organized by Microsoft India Team. The task was to build a Microsoft Teams Clone with at least one mandatory functionality, that is, a minimum of two participants should be able connect with each other to have a video conversation.
-Throughout this project, my fellow mentees and I had constant support from the mentors. Also, various AMA Sessions, Webinars and Leader talks were organized by Microsoft and Team Ace Hacker during this period.
+Throughout this project, my fellow mentees and I had constant support from the mentors(Ms. Salona Sinha and Mr. Nikhil Arora). Also, various AMA Sessions, Webinars and Leader talks were organized by Microsoft and Team Ace Hacker during this period.
 [Microsoft Engage 2021 Website](https://microsoft.acehacker.com/engage2021)
 
 ### Features
